@@ -115,12 +115,26 @@ def supprimer():
 @app.route("/public/<id>")
 def public(id):
 
-    user = users.get(id)
+    user = User.query.get(int(id))
 
     if user and user.public:
-        return render_template("public.html", user=user)
+
+        return render_template(
+            "public.html",
+            user=user
+        )
 
     return "Profil privé ou inexistant"
+@app.route("/profils")
+@login_required
+def profils():
+
+    utilisateurs = User.query.filter_by(public=True).all()
+
+    return render_template(
+        "profils.html",
+        utilisateurs=utilisateurs
+    )
 if __name__ == "__main__":
 
     with app.app_context():
