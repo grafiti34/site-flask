@@ -87,12 +87,12 @@ def modifier():
     if request.method == "POST":
 
         current_user.email = request.form["email"]
+
         current_user.description = request.form["description"]
 
-        if "public" in request.form:
-            current_user.public = True
-        else:
-            current_user.public = False
+        current_user.public = "public" in request.form
+
+        db.session.commit()
 
         return redirect(url_for("dashboard"))
 
