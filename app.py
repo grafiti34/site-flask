@@ -94,7 +94,7 @@ def modifier():
 
         db.session.commit()
 
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profils"))
 
     return render_template("modifier.html")
 
